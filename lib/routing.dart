@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
-import 'package:task1/logger/navigator_observer/navigator_observer.dart';
+import 'package:animations/animations.dart';
+import 'package:task1/features/error/ui/error_ui.dart';
 import 'package:task1/features/questions/ui/questions_ui.dart';
 import 'package:task1/features/splash_screen/ui/splash_ui.dart';
-import 'package:task1/features/error/ui/error_ui.dart';
-
-import 'home/ui/home_ui.dart';
+import 'package:task1/home/ui/home_ui.dart';
+import 'package:task1/logger/navigator_observer/navigator_observer.dart';
 
 final navRouter = GoRouter(
   initialLocation: '/splash',
@@ -14,25 +14,84 @@ final navRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/splash',
-      builder: (context, state) => const SplashScreenUI(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: const SplashScreenUI(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeThroughTransition(
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              child: child,
+            );
+          },
+        );
+      },
     ),
     GoRoute(
       path: '/home',
-      builder: (context, state) => const HomeUi(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: const HomeUi(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return SharedAxisTransition(
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              transitionType: SharedAxisTransitionType.horizontal,
+              child: child,
+            );
+          },
+        );
+      },
       routes: [
         GoRoute(
           path: 'questions/:endpoint',
-          builder: (context, state) {
+          pageBuilder: (context, state) {
             final endpoint = state.pathParameters['endpoint']!;
-            return QuestionsUi(endpoint: endpoint);
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: QuestionsUi(endpoint: endpoint),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.vertical,
+                  child: child,
+                );
+              },
+            );
           },
         ),
       ],
     ),
     GoRoute(
       path: '/error',
-      builder: (context, state) => const ErrorUi(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: const ErrorUi(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeScaleTransition(
+              animation: animation,
+              child: child,
+            );
+          },
+        );
+      },
     ),
   ],
-  errorBuilder: (context, state) => const ErrorUi(),
+  errorPageBuilder: (context, state) {
+    return CustomTransitionPage(
+      key: state.pageKey,
+      child: const ErrorUi(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeScaleTransition(
+          animation: animation,
+          child: child,
+        );
+      },
+    );
+  },
 );
