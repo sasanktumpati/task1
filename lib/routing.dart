@@ -3,8 +3,9 @@ import 'package:animations/animations.dart';
 import 'package:task1/features/error/ui/error_ui.dart';
 import 'package:task1/features/questions/ui/questions_ui.dart';
 import 'package:task1/features/splash_screen/ui/splash_ui.dart';
-import 'package:task1/home/ui/home_ui.dart';
-import 'package:task1/logger/navigator_observer/navigator_observer.dart';
+import 'package:task1/features/home/ui/home_ui.dart';
+
+import 'utils/logger/navigator_observer/navigator_observer.dart';
 
 final navRouter = GoRouter(
   initialLocation: '/splash',

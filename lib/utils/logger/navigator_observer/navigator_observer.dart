@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:task1/logger/log_tags.dart';
-import 'package:task1/logger/logger.dart';
+import 'package:task1/utils/logger/log_tags.dart';
+import 'package:task1/utils/logger/logger.dart';
 
 class GoRouterObserver extends NavigatorObserver {
   @override

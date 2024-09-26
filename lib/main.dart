@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:task1/logger/provider_observer/prov_observer.dart';
+import 'package:task1/utils/logger/provider_observer/prov_observer.dart';
 import 'package:task1/routing.dart';
 
 void main() {

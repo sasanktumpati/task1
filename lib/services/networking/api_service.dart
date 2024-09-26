@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:task1/logger/log_tags.dart';
-import 'package:task1/logger/logger.dart';
+import 'package:task1/utils/logger/log_tags.dart';
+import 'package:task1/utils/logger/logger.dart';
 import 'package:task1/services/networking/models/response/response_model.dart';
 import '../../utils/constants.dart';
 

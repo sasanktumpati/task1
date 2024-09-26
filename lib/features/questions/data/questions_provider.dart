@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task1/services/networking/models/response/response_model.dart';
-import 'package:task1/logger/log_tags.dart';
-import 'package:task1/logger/logger.dart';
+import 'package:task1/utils/logger/log_tags.dart';
+import 'package:task1/utils/logger/logger.dart';
 import '../../../services/networking/api_service.dart';
 
 final questionsProvider = FutureProvider.family<ResponseModel?, String>((
